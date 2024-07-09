@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const users = require('./routes/user');
+const doctors = require('./routes/doctor');
 app.use(express.json());
 app.use(cookieParser());
 
@@ -11,7 +12,8 @@ app.use(cors({
     credentials:true
 }));
 
-app.use('/api/workshop',users);
+app.use('/api/credentials',users);
+app.use('/api/doctors',doctors);
 
 
 module.exports = app;
