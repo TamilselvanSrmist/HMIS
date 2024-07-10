@@ -1,16 +1,6 @@
 const mongoose = require("mongoose");
 
-const specializationEnum = [
-    "Cardiologist",
-    "Psychiatrist",
-    "Neurologists",
-    "Oncologist",
-    "Dermatologist",
-    "Endocrinologist",
-    "Gastroenterologist",
-    "General practitioner",
-    
-  ];
+
 
 const DoctorSchema = new mongoose.Schema({
   firstName: {
@@ -84,11 +74,10 @@ const DoctorSchema = new mongoose.Schema({
       ],
     },
   },
-  specialization: {
-    type: String,
-    required: [true, "Specialization is required!"],
-    enum: specializationEnum
-  },
+ specialization:{
+  type:String,
+  required:[true,"Specialization is required!"]
+ },
   userId : {
     type:mongoose.Schema.Types.ObjectId, ref: 'User'
   },
@@ -98,6 +87,11 @@ const DoctorSchema = new mongoose.Schema({
   }
 });
 
+
 let Doctor = mongoose.model('Doctor',DoctorSchema);
-module.exports = {Doctor,specializationEnum};
+module.exports = {Doctor};
+
+
+
+
 
