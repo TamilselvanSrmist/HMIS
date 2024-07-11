@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 
 const userSchema = new mongoose.Schema({
@@ -18,7 +19,7 @@ const userSchema = new mongoose.Schema({
     role:{
         type: String,
         enum: {
-            values:['doctor','patient','nurse','admin','pharmacist'],
+            values:['doctor','patient','nurse','admin','pharmacist','attender'],
         },
         required: true,
 
@@ -26,6 +27,7 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         required: [true, "Password is required!"],
+        select:false,
     },
     createdAt: {
         type: Date,
@@ -37,6 +39,16 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save',async function(next) {
     this.password = await bcrypt.hash(this.password,10);
 });
+
+userSchema.methods.validatePassword = async function(password) {
+    return await bcrypt.compare(password,this.password);
+}
+
+userSchema.methods.getJwtToken = function (){
+    return jwt.sign({id: this.id}, process.env.JWT_SECRET_KEY, {
+        expiresIn: process.env.JWT_EXPIRES_TIME
+    });
+}
 
 let User = mongoose.model('User', userSchema);
 

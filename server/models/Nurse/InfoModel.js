@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 
 
-const PatientSchema = new mongoose.Schema({
+const NurseSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: [true, "First Name is required!"],
@@ -88,8 +88,8 @@ const PatientSchema = new mongoose.Schema({
 });
 
 
-let Patient = mongoose.model('Patient',PatientSchema);
-module.exports = {Patient};
+let Nurse = mongoose.model('Nurse',NurseSchema);
+module.exports = {Nurse};
 
 
 

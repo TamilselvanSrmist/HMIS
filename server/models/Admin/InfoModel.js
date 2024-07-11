@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 
-
-
-const PatientSchema = new mongoose.Schema({
+const AdminSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: [true, "First Name is required!"],
@@ -60,24 +58,24 @@ const PatientSchema = new mongoose.Schema({
     maxLength: [10, "Mobile Number must be exaclty 10 numbers"],
     minLength: [10, "Mobile Number must be exaclty 10 numbers"],
   },
-  department: {
-    type: String,
-    required: [true, "Department is required!"],
-    enum: {
-      values: [
-        "General Physician",
-        "Hand Tools",
-        "Indoor Tools",
-        "Outdoor Tools",
-        "Power Tools",
-        "Psicologia",
-      ],
-    },
-  },
- specialization:{
-  type:String,
-  required:[true,"Specialization is required!"]
- },
+//   department: {
+//     type: String,
+//     required: [true, "Department is required!"],
+//     enum: {
+//       values: [
+//         "General Physician",
+//         "Hand Tools",
+//         "Indoor Tools",
+//         "Outdoor Tools",
+//         "Power Tools",
+//         "Psicologia",
+//       ],
+//     },
+//   },
+//  specialization:{
+//   type:String,
+//   required:[true,"Specialization is required!"]
+//  },
   userId : {
     type:mongoose.Schema.Types.ObjectId, ref: 'User'
   },
@@ -88,8 +86,8 @@ const PatientSchema = new mongoose.Schema({
 });
 
 
-let Patient = mongoose.model('Patient',PatientSchema);
-module.exports = {Patient};
+let Admin = mongoose.model('Admin',AdminSchema);
+module.exports = {Admin};
 
 
 
